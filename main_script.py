@@ -1,29 +1,17 @@
-# Wchodzę na stronę GET / -> zostaje mi zwrócona lista moich wydatków, na górze przycisk z napisem
-# "Dodaj kolejny". Po kliknięciu na ten guzik zostajemy przeniesieni na strone /add.
-# Metoda GET na tej stronie zwróci nam formularz z dwoma inputami: kwota, opis.
-# Po kliknięciu submit tego formularza zostaje wysłany POST na /add i wydatek zostaje zapisany w:
-# a) pliku json (rzućcie okiem na poprzednie zadanie dodatkowe i sprawdźcie w necie jak zapisać json-a do pliku)
-# b) w bazie danych (dopiero podczas 3 dnia na zajęciach będzie wyjaśnione jak to robić,
-# dlatego jest to opcjonalne)
-# Na stronie głównej obok przycisku "Dodaj kolejny" będzie przycisk
-# "Wygeneruj raport" który będzie nam zwracał plik .pdf w którym będzie jakiś nagłówek w stylu
-# "Raport z dnia {aktualna_data}", poniżej będzie tabelka zawierająca 3 kolumny: liczba porzadkowa, opis, kwota.
-#
-from flask import Flask, request, render_template, redirect, send_file, make_response
+from flask import Flask, request, render_template, redirect, send_file
 from psycopg2 import connect, OperationalError
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from datetime import date
 
-username = "postgres"
-passwd = "coderslab"
-hostname = "127.0.0.1"  # lub "localhost"
+username = "fill-me"
+passwd = "fill-me"
+hostname = "fill-me"
 db_name = "costs_db"
 
 
 def create_connection(username, passwd, hostname, db_name):
     try:
-        # tworzymy nowe połączenie
         cnx = connect(user=username, password=passwd, host=hostname, database=db_name)
         print("Połączenie udane.")
         return cnx
@@ -51,7 +39,6 @@ def show_form():
         parsedCostsList = """
                   <li></li>
             """
-    # return render_template('main_list.html', parsedCostsList=parsedCostsList)
     return """
         <!DOCTYPE html>
             <html lang="en">
