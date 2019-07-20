@@ -60,6 +60,7 @@ def show_form():
  
     """.format(parsedCostsList)
 
+
 @app.route('/get-pdf')
 def pdf():
     context = create_connection(username, passwd, hostname, db_name)
@@ -97,7 +98,6 @@ def add_to_db():
     amount = request.form["amount"]
 
     context = create_connection(username, passwd, hostname, db_name)
-    # parsedTable = ""
 
     if context:
         cursor = context.cursor()
